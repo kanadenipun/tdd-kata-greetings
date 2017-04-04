@@ -9,6 +9,8 @@ import static org.junit.Assert.assertEquals;
 public class GreetingsTest {
 
     private Greetings greetings;
+    private String expectedResult;
+    private String actualResult;
 
     @Before
     public void setUp() throws Exception {
@@ -17,31 +19,29 @@ public class GreetingsTest {
 
     @Test
     public void shouldGreetBob() throws Exception {
-        //given
-        String expectedResult = "Hello Bob";
-        //when
-        String actualResult = greetings.greet("Bob");
-        //then
+        expectedResult = "Hello Bob";
+        actualResult = greetings.greet("Bob");
         assertEquals(expectedResult, actualResult);
     }
 
     @Test
     public void shouldGreetJohn() throws Exception {
-        //given
-        String expectedResult = "Hello John";
-        //when
-        String actualResult = greetings.greet("John");
-        //then
+        expectedResult = "Hello John";
+        actualResult = greetings.greet("John");
         assertEquals(expectedResult, actualResult);
     }
 
     @Test
     public void shouldGreetWithPredefinedMessageIfNoNameIsPassed() throws Exception {
-        //given
-        String expecteResult = "Hello, My friend";
-        //when
-        String actualResult = greetings.greet(null);
-        //then
-        assertEquals(expecteResult, actualResult);
+        expectedResult = "Hello, My friend";
+        actualResult = greetings.greet(null);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void shouldGreetWithAShoutIfInputIsAllCaps() throws Exception {
+        expectedResult = "HELLO JERRY!!";
+        actualResult = greetings.greet("JERRY");
+        assertEquals(expectedResult, actualResult);
     }
 }
