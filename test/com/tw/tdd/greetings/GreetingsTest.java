@@ -1,14 +1,24 @@
 package com.tw.tdd.greetings;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+
 public class GreetingsTest {
-    @org.junit.Test
+
+    private Greetings greetings;
+
+    @Before
+    public void setUp() throws Exception {
+        greetings = new Greetings();
+    }
+
+    @Test
     public void shouldGreetBob() throws Exception {
+
         //given
-        Greetings greetings = new Greetings();
         String expectedResult = "Hello Bob";
         //when
         String actualResult = greetings.greet("Bob");
@@ -19,11 +29,20 @@ public class GreetingsTest {
     @Test
     public void shouldGreetJohn() throws Exception {
         //given
-        Greetings greetings = new Greetings();
         String expectedResult = "Hello John";
-        //when
+        //when\
         String actualResult = greetings.greet("John");
         //then
         assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void shouldGreetWithPredefinedMessageIfNoNameIsPassed() throws Exception {
+        //given
+        String expecteResult = "Hello, My friend";
+        //when
+        String actualResult = greetings.greet(null);
+        //then
+        assertEquals(expecteResult, actualResult);
     }
 }
