@@ -17,7 +17,6 @@ public class GreetingsTest {
 
     @Test
     public void shouldGreetBob() throws Exception {
-
         //given
         String expectedResult = "Hello Bob";
         //when
@@ -30,7 +29,7 @@ public class GreetingsTest {
     public void shouldGreetJohn() throws Exception {
         //given
         String expectedResult = "Hello John";
-        //when\
+        //when
         String actualResult = greetings.greet("John");
         //then
         assertEquals(expectedResult, actualResult);
