@@ -44,4 +44,11 @@ public class GreetingsTest {
         actualResult = greetings.greet("JERRY");
         assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    public void shouldHandleMultipleNames() throws Exception {
+        expectedResult = "Hello, Jill and Jane";
+        actualResult = greetings.greet("Jill, Jane");
+        assertEquals(expectedResult, actualResult);
+    }
 }

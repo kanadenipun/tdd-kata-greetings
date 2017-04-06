@@ -4,12 +4,23 @@ import static java.lang.Character.isLowerCase;
 
 public class Greetings {
 
+    private final String GENERIC_GREETING = "Hello, ";
+
     public String greet(String name) {
 
+
         if(name==null)
-            return "Hello, My friend";
+            return GENERIC_GREETING+"My friend";
+
+        else if(name.contains(","))
+            return GENERIC_GREETING
+                    + name.substring(0, name.indexOf(","))
+                    + " and"
+                    + name.substring(name.indexOf(",")+1, name.length());
+
         else if(isAllCaps(name))
             return "HELLO " + name + "!!";
+
         else
             return "Hello " + name;
     }
