@@ -19,35 +19,35 @@ public class GreetingsTest {
 
     @Test
     public void shouldGreetBob() throws Exception {
-        expectedResult = "Hello Bob";
+        expectedResult = "Hello, Bob.";
         actualResult = greetings.greet("Bob");
         assertEquals(expectedResult, actualResult);
     }
 
     @Test
     public void shouldGreetJohn() throws Exception {
-        expectedResult = "Hello John";
+        expectedResult = "Hello, John.";
         actualResult = greetings.greet("John");
         assertEquals(expectedResult, actualResult);
     }
 
     @Test
     public void shouldGreetWithPredefinedMessageIfNoNameIsPassed() throws Exception {
-        expectedResult = "Hello, My friend";
+        expectedResult = "Hello, My friend.";
         actualResult = greetings.greet(null);
         assertEquals(expectedResult, actualResult);
     }
 
     @Test
     public void shouldGreetWithAShoutIfInputIsAllCaps() throws Exception {
-        expectedResult = "HELLO JERRY!!";
+        expectedResult = "HELLO JERRY!";
         actualResult = greetings.greet("JERRY");
         assertEquals(expectedResult, actualResult);
     }
 
     @Test
     public void shouldHandleMultipleNames() throws Exception {
-        expectedResult = "Hello, Jill and Jane";
+        expectedResult = "Hello, Jill and Jane.";
         actualResult = greetings.greet("Jill, Jane");
         assertEquals(expectedResult, actualResult);
     }
