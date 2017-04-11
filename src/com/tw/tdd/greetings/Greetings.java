@@ -2,15 +2,14 @@ package com.tw.tdd.greetings;
 
 import static java.lang.Character.isLowerCase;
 
-public class Greetings {
+class Greetings {
 
-    private final String GENERIC_GREETING = "Hello, ";
-    private final String SHOUT_GREETING = "HELLO ";
-    private final char DOT = '.';
-    private final char EXCLAMATION_MARK = '!';
+    String greet(String name) {
 
-    public String greet(String name) {
-
+        final String SHOUT_GREETING = "HELLO ";
+        final String GENERIC_GREETING = "Hello, ";
+        final char EXCLAMATION_MARK = '!';
+        final char DOT = '.';
 
         if(name==null)
             return GENERIC_GREETING
