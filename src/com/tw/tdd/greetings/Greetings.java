@@ -1,43 +1,65 @@
 package com.tw.tdd.greetings;
 
-import static java.lang.Character.isLowerCase;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class Greetings {
 
+    private static final String GENERIC_GREETING = "Hello,";
+    private Boolean isShout = false;
+    private static final String SHOUT_GREETING = "HELLO";
+    final char EXCLAMATION_MARK = '!';
+    final char DOT = '.';
+
+
     String greet(String name) {
 
-        final String SHOUT_GREETING = "HELLO ";
-        final String GENERIC_GREETING = "Hello, ";
-        final char EXCLAMATION_MARK = '!';
-        final char DOT = '.';
+        String returnString;
 
         if(name==null)
-            return GENERIC_GREETING
-                    +"My friend"
-                    + DOT;
+            return GENERIC_GREETING +" My friend" + DOT;
 
-        else if(name.contains(","))
-            return GENERIC_GREETING
-                    + name.substring(0, name.indexOf(","))
-                    + " and"
-                    + name.substring(name.indexOf(",")+1, name.length())
-                    + DOT;
+        Pattern smallNamePattern = Pattern.compile("([A-Z][a-z]+)");
+        Pattern capitalNamePattern = Pattern.compile("([A-Z][A-Z]+)");
+        Matcher smallNameMatcher = smallNamePattern.matcher(name);
+        Matcher capitalNameMatcher = capitalNamePattern.matcher(name);
 
-        else if(isAllCaps(name))
-            return SHOUT_GREETING
-                    + name
-                    + EXCLAMATION_MARK;
+        List<String> nameList = new ArrayList<>();
 
-        else
-            return GENERIC_GREETING
-                    + name
-                    + DOT;
+        if(smallNameMatcher.find()) {
+            smallNameMatcher.reset();
+            while (smallNameMatcher.find()) {
+                nameList.add(smallNameMatcher.group());
+            }
+        }
+
+        if(capitalNameMatcher.find()) {
+            capitalNameMatcher.reset();
+            while (capitalNameMatcher.find()) {
+                nameList.add(capitalNameMatcher.group());
+            }
+            isShout = true;
+        }
+
+        returnString = createReturnString(nameList);
+        return isShout?returnString.toUpperCase() + EXCLAMATION_MARK:returnString + DOT;
     }
 
-    private boolean isAllCaps(String name) {
-        Boolean returnValue = true;
-        for(char currentChar: name.toCharArray())
-            returnValue = !isLowerCase(currentChar);
-        return returnValue;
+    private String createReturnString(List<String> nameList) {
+        String returnString = isShout?SHOUT_GREETING:GENERIC_GREETING;
+        int i = 1;
+        int nameListSize = nameList.size();
+        for (String name : nameList) {
+                returnString += " " + name;
+                if(nameListSize-i>2)
+                    returnString+= ",";
+                else if(nameListSize-i==1)
+                    returnString+=" and";
+                i++;
+        }
+        return returnString;
     }
+
 }
